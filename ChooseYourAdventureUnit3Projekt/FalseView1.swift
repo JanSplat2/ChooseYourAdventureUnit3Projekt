@@ -11,31 +11,37 @@ struct FalseView1: View {
     @Binding var Name: String
     
     var body: some View {
-        VStack {
-            Text("Narrator: Oh no! \(Name) chose the wrong path and fell into lava!")
-                .font(.headline)
-                .padding()
-            
-            Image("Lava")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 350, height: 500)
-                .clipShape(RoundedRectangle(cornerRadius: 15))
-            
-            Spacer()
-            
-            NavigationLink(destination: ContentView(Name: $Name)) {
-                Text("Restart")
+        ZStack{
+            Rectangle()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .foregroundStyle(LinearGradient(colors: [.redFalse1, .greyFalse1], startPoint: .topTrailing, endPoint: .bottomLeading))
+                .ignoresSafeArea()
+            VStack {
+                Text("Narrator: Oh no! \(Name) chose the wrong path and fell into lava!")
                     .font(.headline)
                     .padding()
-                    .frame(width: 200)
-                    .background(Color.red)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+                
+                Image("Lava")
+                    .resizable()
+                    .scaledToFit()
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .frame(width: 350, height: 500)
+                
+                Spacer()
+                
+                NavigationLink(destination: ContentView(Name: $Name)) {
+                    Text("Restart")
+                        .font(.headline)
+                        .padding()
+                        .frame(width: 200)
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
             }
+            .padding()
+            .transition(.slide)
         }
-        .padding()
-        .transition(.slide)
     }
 }
 

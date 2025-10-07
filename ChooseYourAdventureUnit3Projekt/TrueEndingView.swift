@@ -11,30 +11,36 @@ struct TrueEndingView: View {
     @Binding var Name: String
     
     var body: some View {
-        VStack {
-            Text("Congratulations, \(Name)! You found the treasure of wisdom!")
-                .font(.headline)
-                .multilineTextAlignment(.center)
-                .padding()
-            
-            Image("Treasure")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 250, height: 200)
-                .clipShape(RoundedRectangle(cornerRadius: 15))
-                .padding()
-            
-            NavigationLink(destination: ContentView(Name: $Name)) {
-                Text("Play Again")
+        ZStack{
+            Rectangle()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .foregroundStyle(LinearGradient(colors: [.goldenEnding, .blueEnding], startPoint: .top, endPoint: .bottom))
+                .ignoresSafeArea()
+            VStack {
+                Text("Congratulations, \(Name)! You found the treasure of wisdom!")
                     .font(.headline)
+                    .multilineTextAlignment(.center)
                     .padding()
-                    .background(Color.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+                
+                Image("Treasure")
+                    .resizable()
+                    .scaledToFit()
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .frame(width: 350, height: 300)
+                    .padding()
+                
+                NavigationLink(destination: ContentView(Name: $Name)) {
+                    Text("Play Again")
+                        .font(.headline)
+                        .padding()
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
             }
+            .padding()
+            .transition(.opacity)
         }
-        .padding()
-        .transition(.opacity)
     }
 }
 

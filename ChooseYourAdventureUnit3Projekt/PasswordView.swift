@@ -17,33 +17,39 @@ struct PasswordView: View {
     }
     
     var body: some View {
-        VStack {
-            Text("Narrator: \(Name), Trivia Question: What is the national aninmal of Scotlan?")
-                .font(.headline)
-                .padding()
-            
-            TextField("Enter Animal", text: $password)
-                .textFieldStyle(.roundedBorder)
-                .padding()
-            
-            Button("Unlock") {
-                wrongPassword = !checkPassword(password)
-            }
-            .buttonStyle(.borderedProminent)
-            .tint(.green)
-            
-            if checkPassword(password) {
-                NavigationLink("Continue", destination: TrueEndingView(Name: $Name))
+        ZStack{
+            Rectangle()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .foregroundStyle(LinearGradient(colors: [.blue, .white], startPoint: .top, endPoint: .bottom))
+                .ignoresSafeArea()
+            VStack {
+                Text("Narrator: \(Name), Trivia Question: What is the national aninmal of Scotlan?")
+                    .font(.headline)
                     .padding()
+                
+                TextField("Enter Animal", text: $password)
+                    .textFieldStyle(.roundedBorder)
+                    .padding()
+                
+                Button("Unlock") {
+                    wrongPassword = !checkPassword(password)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.green)
+                
+                if checkPassword(password) {
+                    NavigationLink("Continue", destination: TrueEndingView(Name: $Name))
+                        .padding()
+                }
+                
+                if wrongPassword {
+                    NavigationLink("Wrong! Back to Start", destination: ContentView(Name: $Name))
+                        .foregroundColor(.red)
+                }
             }
-            
-            if wrongPassword {
-                NavigationLink("Wrong! Back to Start", destination: ContentView(Name: $Name))
-                    .foregroundColor(.red)
-            }
+            .padding()
+            .transition(.slide)
         }
-        .padding()
-        .transition(.slide)
     }
 }
 
