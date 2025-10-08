@@ -11,7 +11,7 @@ import SwiftUI
 struct ChooseYourAdventureUnit3ProjektApp: App {
     var body: some Scene {
         WindowGroup {
-            @Previewable @State var Name: String = ""
+            @Previewable @State var Name: String = "Enter your Name"
             ContentView(Name: $Name)
         }
     }
