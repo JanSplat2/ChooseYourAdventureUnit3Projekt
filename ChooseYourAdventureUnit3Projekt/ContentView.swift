@@ -6,6 +6,27 @@
 //
 
 import SwiftUI
+import AVFoundation
+
+var player: AVAudioPlayer?
+
+func playMainTheme() {
+    let soundName = "TotKMainTheme"
+    
+    if let url = Bundle.main.url(forResource: soundName, withExtension: "mp3") {
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.numberOfLoops = -1
+            player?.volume = 1.0
+            player?.play()
+            print("✅ Now playing \(soundName)")
+        } catch {
+            print("⚠️ Couldn't load \(soundName): \(error.localizedDescription)")
+        }
+    } else {
+        print("⚠️ Sound file not found: \(soundName).mp3")
+    }
+}
 
 struct ContentView: View {
     @Binding var Name: String
@@ -63,6 +84,13 @@ struct ContentView: View {
                     
                     Spacer()
                 }
+                .onAppear {
+                    playMainTheme()
+                }
+                .onDisappear {
+                    player?.stop()
+                }
+
                 .padding()
             }
         }
