@@ -23,7 +23,7 @@ struct PasswordView: View {
                 .foregroundStyle(LinearGradient(colors: [.blue, .white], startPoint: .top, endPoint: .bottom))
                 .ignoresSafeArea()
             VStack {
-                Text("Narrator: \(Name), Trivia Question: What is the national aninmal of Scotlan?")
+                Text("Narrator: \(Name), Trivia Question: What is the national aninmal of Scotland? \n(first letter is Big)")
                     .font(.headline)
                     .padding()
                 
