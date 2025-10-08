@@ -16,8 +16,25 @@ func playMainTheme() {
     if let url = Bundle.main.url(forResource: soundName, withExtension: "mp3") {
         do {
             player = try AVAudioPlayer(contentsOf: url)
-            player?.numberOfLoops = -1
+            player?.numberOfLoops = 0
             player?.volume = 1.0
+            player?.play()
+            print("✅ Now playing \(soundName)")
+        } catch {
+            print("⚠️ Couldn't load \(soundName): \(error.localizedDescription)")
+        }
+    } else {
+        print("⚠️ Sound file not found: \(soundName).mp3")
+    }
+}
+func playGuardianTheme() {
+    let soundName = "Guardian" // 🎵 name of your sound file (without .mp3)
+    
+    if let url = Bundle.main.url(forResource: soundName, withExtension: "mp3") {
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.numberOfLoops = 0 // 🔁 Loop forever (optional)
+            player?.volume = 1.0       // 🎚 Full volume
             player?.play()
             print("✅ Now playing \(soundName)")
         } catch {
@@ -81,16 +98,8 @@ struct ContentView: View {
                         .transition(.scale(scale: 0.8))
                         .animation(.easeInOut, value: Name)
                     }
-                    
                     Spacer()
                 }
-                .onAppear {
-                    playMainTheme()
-                }
-                .onDisappear {
-                    player?.stop()
-                }
-
                 .padding()
             }
         }

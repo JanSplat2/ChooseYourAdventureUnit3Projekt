@@ -39,6 +39,12 @@ struct FalseView1: View {
                         .cornerRadius(10)
                 }
             }
+            .onAppear {
+                playGuardianTheme()
+            }
+            .onDisappear {
+                player?.stop()
+            }
             .padding()
             .transition(.slide)
         }

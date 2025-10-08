@@ -37,6 +37,12 @@ struct FalseView2: View {
                         .cornerRadius(10)
                 }
             }
+            .onAppear {
+                playGuardianTheme()
+            }
+            .onDisappear {
+                player?.stop()
+            }
             .transition(.opacity)
         }
     }

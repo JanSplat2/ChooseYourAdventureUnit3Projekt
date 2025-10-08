@@ -41,6 +41,13 @@ struct TrueEndingView: View {
             .padding()
             .transition(.opacity)
         }
+        .onAppear {
+            playMainTheme()
+        }
+        .onDisappear {
+            player?.stop()
+        }
+
     }
 }
 
